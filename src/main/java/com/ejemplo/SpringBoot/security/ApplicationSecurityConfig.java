@@ -74,10 +74,18 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         
         //Aquí también podemos configurar el acceso por roles
         http.authorizeRequests()
+                .antMatchers("/nuevo/usuario").permitAll()
                 .antMatchers("/auth/login").permitAll()
                 .anyRequest().authenticated();
+
         
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        
+        //Autorizo a realizar POST para crear usuario sin tener que estar autenticado
+        /*http.authorizeRequests()
+                .antMatchers("/nuevo/usuario").permitAll();*/
+                
+                
     }
     
     

@@ -314,7 +314,7 @@ public class Controller {
     
     
     
-    //API PARA USUARIO
+    //API PARA LOGIN USUARIO
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request){
         try{
@@ -346,7 +346,7 @@ public class Controller {
     
     
     
-    /*@PostMapping ("/nuevo/usuario")
+    @PostMapping ("/nuevo/usuario")
     public void agegarUsuario(@RequestBody Usuario user){
         usuarioServ.crearUsuario(user);                                        
     }
@@ -366,7 +366,7 @@ public class Controller {
     @PutMapping ("/editar/usuario")
     public void modificarUsuario(@RequestBody Usuario user){
         usuarioServ.modificarUsuario(user);                                    
-    }   */
+    }   
     
     
     

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +23,7 @@ public class UsuarioService implements IUsuarioService {
     //@Autowired
     //public UsuarioRepository
 
-    
-    
+      
     
     
     //Implementa todos los metodos de la interface IPersonaService    
@@ -33,7 +34,14 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public void crearUsuario(Usuario user) {
-        userRepo.save(user);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        
+        Usuario newUser = new Usuario (user.getEmail(), encodedPassword);
+        userRepo.save(newUser);
+        
+        //assertThat(savedUser).isNotNull();
+        //assertThat(savedUser.getId()).isGreaterThan(0);
     }
 
     @Override
