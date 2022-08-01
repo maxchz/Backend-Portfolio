@@ -53,6 +53,11 @@ public class UsuarioService implements IUsuarioService {
     public Usuario buscarUsuario(Long id) {
         return userRepo.findById(id).orElse(null);
     }
+    
+    @Override
+    public Usuario buscarUsuarioPorEmail(String email) {
+        return userRepo.buscaUsuarioPorEmail(email);
+    }
 
     @Override
     public void modificarUsuario(Usuario user) {

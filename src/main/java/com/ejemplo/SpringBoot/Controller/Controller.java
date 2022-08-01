@@ -103,6 +103,13 @@ public class Controller {
         return persoServ.buscarPersona(id);
     }
     
+    @GetMapping ("/ver/persona-idUsuario/{id_usuario}")
+    @ResponseBody
+    public Persona buscarPersonaPorIdUsuario(@PathVariable Long id_usuario){
+        //Si devuelve un objeto vacio, automaticamente devuelve un json vacio
+        return persoServ.buscarPersonaPorIdUsuario(id_usuario);
+    }
+    
     //METODO DELETE para borrar persona segun la id
     @DeleteMapping ("/borrar-persona/{id}")
     public void borrarPersona (@PathVariable Long id){
@@ -356,6 +363,12 @@ public class Controller {
     public List<Usuario> verUsuario(){
         //Si devuelve un objeto vacio, automaticamente devuelve un json vacio
         return usuarioServ.verUsuario();                                      
+    }
+    
+    @GetMapping ("/ver/usuario/{email}")
+    public Usuario verUsuarioPorEmail(@PathVariable String email){
+        //Si devuelve un objeto vacio, automaticamente devuelve un json vacio
+        return usuarioServ.buscarUsuarioPorEmail(email);                                      
     }
     
     @DeleteMapping ("/usuario/{id}")

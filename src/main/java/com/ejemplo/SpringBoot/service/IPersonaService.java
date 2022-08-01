@@ -19,6 +19,8 @@ public interface IPersonaService {
     //Metodos del CRUD: 
     public Persona buscarPersona(Long id);
     
+    public Persona buscarPersonaPorIdUsuario (Long id);
+    
     //MEtodo del CRUD: modificar
     
     public void modificarPersona(Persona pers);

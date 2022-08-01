@@ -17,6 +17,8 @@ public interface IUsuarioService {
     //Metodos del CRUD: 
     public Usuario buscarUsuario(Long id);
     
+    public Usuario buscarUsuarioPorEmail(String email);
+    
     //MEtodo del CRUD: modificar
     
     public void modificarUsuario(Usuario user);
