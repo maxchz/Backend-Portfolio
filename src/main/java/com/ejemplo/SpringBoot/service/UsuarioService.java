@@ -56,7 +56,14 @@ public class UsuarioService implements IUsuarioService {
     
     @Override
     public Usuario buscarUsuarioPorEmail(String email) {
+        
         return userRepo.buscaUsuarioPorEmail(email);
+    }
+    
+    @Override
+    public boolean existeEmailRegistro(String email) {
+        
+        return userRepo.existeEmailRegistro(email);
     }
 
     @Override

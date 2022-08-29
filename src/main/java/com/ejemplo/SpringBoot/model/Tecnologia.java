@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 public class Tecnologia {
     @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String tecnologia;
     

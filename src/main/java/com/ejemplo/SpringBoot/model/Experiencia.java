@@ -19,7 +19,7 @@ import lombok.Setter;
 @Entity
 public class Experiencia {
     @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     //@NotEmpty( message = "El campo nombre empresa no debe estar vacio")
     private String nombreEmpresa;

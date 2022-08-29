@@ -27,9 +27,10 @@ public class ExperienciaService implements IExperienciaService {
     }
 
     @Override
-    public void borrarExperiencia(Long id) {
+    public void borrarExperienciaPorId(Long id) {
         experienciaRepo.deleteById(id);
     }
+   
 
     @Override
     public Experiencia buscarExperiencia(Long id) {

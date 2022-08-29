@@ -15,4 +15,6 @@ public interface ExperienciaRepository extends JpaRepository <Experiencia, Long>
     @Query("select x from Experiencia x where x.persona_id like :var_param")
     public abstract List<Experiencia> buscaPorIdPersona(@Param("var_param") Long id);
     
+    
+    
 }

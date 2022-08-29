@@ -20,7 +20,7 @@ public interface IHabilidadService {
     public Habilidad buscarHabilidad(Long id);
     
     //Método para buscar Habilidad segun clave foránea
-    public List<HabTech> buscarHabilidadPorIdPersona(Long id);
+    public List<Habilidad> buscarHabilidadPorIdPersona(Long id);
     
     //MEtodo del CRUD: modificar
     public void modificarHabilidad(Habilidad habil);

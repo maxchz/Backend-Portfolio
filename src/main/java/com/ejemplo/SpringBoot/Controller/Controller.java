@@ -10,12 +10,14 @@ import com.ejemplo.SpringBoot.model.Experiencia;
 import com.ejemplo.SpringBoot.model.HabTech;
 import com.ejemplo.SpringBoot.model.Habilidad;
 import com.ejemplo.SpringBoot.model.HabilidadBlanda;
+import com.ejemplo.SpringBoot.model.Mensaje;
 import java.util.ArrayList;
 import java.util.List;
 import com.ejemplo.SpringBoot.model.Persona;
 import com.ejemplo.SpringBoot.model.Proyecto;
 import com.ejemplo.SpringBoot.model.Tecnologia;
 import com.ejemplo.SpringBoot.model.Usuario;
+import com.ejemplo.SpringBoot.service.EnviarmensajeService;
 import com.ejemplo.SpringBoot.service.IEducacionService;
 import com.ejemplo.SpringBoot.service.IExperienciaService;
 import com.ejemplo.SpringBoot.service.IHabilidadBlandaService;
@@ -26,6 +28,7 @@ import com.ejemplo.SpringBoot.service.ITecnologiaService;
 import com.ejemplo.SpringBoot.service.IUsuarioService;
 //import static com.mysql.cj.conf.PropertyKey.logger;
 import java.lang.System.Logger;
+import java.security.GeneralSecurityException;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.validation.Valid;
 import org.slf4j.LoggerFactory;
@@ -49,6 +52,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200","http://localhost:4200/portfolio"} )
 public class Controller {
     //Inyectamos la dependecnia de Service de los objetos
     @Autowired
@@ -67,6 +71,8 @@ public class Controller {
     private ITecnologiaService tecnologiaServ;
     @Autowired
     private IUsuarioService usuarioServ;
+    @Autowired
+    private EnviarmensajeService sendMailService;
     
     //Para gestionar si un usuario pertenece a la BD o no
     @Autowired
@@ -89,9 +95,7 @@ public class Controller {
     
     @GetMapping ("/ver/personas")
     @ResponseBody
-    public List<Persona> verPersonas(){
-       
-        
+    public List<Persona> verPersonas(){           
         //Si devuelve un objeto vacio, automaticamente devuelve un json vacio
         return persoServ.verPersonas();
     }
@@ -155,8 +159,8 @@ public class Controller {
     
     
     @DeleteMapping ("/borrar-experiencia/{id}")
-    public void borrarExperiencia (@PathVariable Long id){
-        experienciaServ.borrarExperiencia(id);
+    public void borrarExperienciaPorId (@PathVariable Long id){
+        experienciaServ.borrarExperienciaPorId(id);
     }
     
     @PutMapping ("/editar/experiencia")
@@ -247,7 +251,7 @@ public class Controller {
     
     @GetMapping ("/ver/habilidad-usuario/{id}")
     @ResponseBody
-    public List<HabTech> verHabilidadPorIdPersona(@PathVariable Long id){
+    public List<Habilidad> verHabilidadPorIdPersona(@PathVariable Long id){
         //Si devuelve un objeto vacio, automaticamente devuelve un json vacio}
         return habilidadServ.buscarHabilidadPorIdPersona(id);              
     }
@@ -276,7 +280,13 @@ public class Controller {
         return habilidadBlandaServ.verHabilidadBlanda();                      
     }
     
-     @GetMapping ("/ver/habilidad-blanda/{id}")
+    @GetMapping ("/ver/habilidad-blanda/habBlanda/{habBlanda}")
+    @ResponseBody
+    public List<HabilidadBlanda> buscarHabBlandaPorHabBlanda(@PathVariable String habBlanda){
+        return habilidadBlandaServ.buscarHabBlandaPorHabBlanda(habBlanda);                      
+    }
+    
+    @GetMapping ("/ver/habilidad-blanda/{id}")
     @ResponseBody
     public List<HabilidadBlanda> verHabilidadBlandaPorIdPersona(@PathVariable Long id){
         //Si devuelve un objeto vacio, automaticamente devuelve un json vacio
@@ -288,7 +298,7 @@ public class Controller {
         habilidadBlandaServ.borrarHabilidadBlanda(id);                      
     }
     
-    @PutMapping ("/editar/habilidad-habilidad")
+    @PutMapping ("/editar/habilidad-blanda")
     public void modificarHabilidadBlanda(@RequestBody HabilidadBlanda habilBlanda){
         habilidadBlandaServ.modificarHabilidadBlanda(habilBlanda);                     
     }
@@ -351,7 +361,7 @@ public class Controller {
     
     
     
-    
+    //API PARA USUARIOS
     
     @PostMapping ("/nuevo/usuario")
     public void agegarUsuario(@RequestBody Usuario user){
@@ -371,6 +381,12 @@ public class Controller {
         return usuarioServ.buscarUsuarioPorEmail(email);                                      
     }
     
+     @GetMapping ("/ver/existe-usuario/{email}")
+    public boolean existeEmailRegistro (@PathVariable String email){
+        //Si devuelve un objeto vacio, automaticamente devuelve un json vacio
+        return usuarioServ.existeEmailRegistro(email);                                      
+    }
+    
     @DeleteMapping ("/usuario/{id}")
     public void borrarUsuario(@PathVariable Long id){
         usuarioServ.borrarUsuario(id);                                      
@@ -381,6 +397,31 @@ public class Controller {
         usuarioServ.modificarUsuario(user);                                    
     }   
     
+    
+    //PARA ENVIAR EMIAL DE SECCION CONTACTO
+    @GetMapping("/")
+    public String index(){
+        return "enviar_vista_email";
+    }
+    
+    @PostMapping("/enviar-mensaje-desde-portfolio")
+    public void sendMail(@RequestBody Mensaje msj) throws GeneralSecurityException{
+        
+
+        
+        String message = msj.getBody() + "\n\n ****Datos de contacto**** " + "\nNombre: " + msj.getName() + "\nE-mail: " + msj.getMail();
+        
+        sendMailService.sendMail("chzanibal@gmail.com", msj.getSubject(), message);
+    }
+    //@PostMapping("/enviar-mensaje-desde-portfolio")
+    //public void sendMail(@RequestParam("name") String name,
+      //                   @RequestParam("email") String mail,
+      //                   @RequestParam("subject") String subject,
+      //                   @RequestParam("message") String body){
+     //   String message = body + "\n\n Datos de contacto: " + "\nNombre: " + name + "\nE-mail: " + mail;
+        
+       // sendMailService.sendMail("chqzmax@gmail.com","chzanibal@hotmail.com", subject, message);
+    //}
     
     
     

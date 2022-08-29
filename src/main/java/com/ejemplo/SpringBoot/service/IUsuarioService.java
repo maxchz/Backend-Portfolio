@@ -19,6 +19,8 @@ public interface IUsuarioService {
     
     public Usuario buscarUsuarioPorEmail(String email);
     
+    public boolean existeEmailRegistro(String email);
+    
     //MEtodo del CRUD: modificar
     
     public void modificarUsuario(Usuario user);

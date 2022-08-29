@@ -24,6 +24,8 @@ public interface IPersonaService {
     //MEtodo del CRUD: modificar
     
     public void modificarPersona(Persona pers);
+    
+    //public void modificarPersonaPorIdUsuario(Persona pers,Long id);
 
 
     

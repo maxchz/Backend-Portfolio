@@ -14,6 +14,10 @@ public interface PersonaRepository extends JpaRepository <Persona,  Long> {
     @Query("select x from Persona x where x.usuario_id like :var_param")
     public abstract Persona buscaPersonaPorIdUsuario(@Param("var_param") Long usuario_id);
     
+    //Creo un método para editar datos de la tabla Persona según el campo usuario_id
+    //@Query(value="", nativeQuery = true)
+    //public abstract Persona modificaPersonaPorIdUsuario(Persona pers, @Param("var_param") Long usuario_id);
+    
 }
 
 

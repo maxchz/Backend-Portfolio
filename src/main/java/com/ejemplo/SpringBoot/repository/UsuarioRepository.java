@@ -20,4 +20,9 @@ public interface UsuarioRepository extends JpaRepository <Usuario, Long> {
     @Query("select x from Usuario x where x.email like :var_param")
     public abstract Usuario buscaUsuarioPorEmail(@Param("var_param") String email);
     
+    //Para cosultar si el email de registro existe
+    //@Query(value= "SELECT exists(select email from portfolio.usuario where usuario.email:email_registro)", nativeQuery= true)
+    @Query("select case when count(x)>0 then true else false end from Usuario x where x.email like :email_registro")
+    public boolean existeEmailRegistro(@Param("email_registro") String email);
+    
 }

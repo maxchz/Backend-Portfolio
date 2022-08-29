@@ -14,7 +14,7 @@ import lombok.Setter;
 @Entity
 public class HabilidadBlanda {
     @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String habilidadBlanda;
     private Long persona_id;

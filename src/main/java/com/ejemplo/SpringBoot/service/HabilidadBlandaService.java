@@ -19,6 +19,12 @@ public class HabilidadBlandaService implements IHabilidadBlandaService {
        return habBlanRepo.findAll();
         
     }
+    
+    @Override
+    public List<HabilidadBlanda> buscarHabBlandaPorHabBlanda(String habBlanda) {
+       return habBlanRepo.buscarHabBlandaPorHabBlanda(habBlanda);
+        
+    }
 
     @Override
     public void crearHabilidadBlanda(HabilidadBlanda habBlan) {

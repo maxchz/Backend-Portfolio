@@ -14,7 +14,8 @@ public interface IExperienciaService {
     public void crearExperiencia(Experiencia expe);
     
     //Metodos del CRUD: DELETE
-    public void borrarExperiencia(Long id);
+    public void borrarExperienciaPorId(Long id);
+    
 
     //Metodos del CRUD: 
     public Experiencia buscarExperiencia(Long id);

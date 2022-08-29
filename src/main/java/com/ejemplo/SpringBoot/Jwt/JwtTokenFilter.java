@@ -5,6 +5,8 @@ import com.ejemplo.SpringBoot.model.Usuario;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         
+       
+        
         //Si el request no tiene encabzado continua con el siguiente filtro, sino salta el filtro
         if (!hasAuthorizationHeader(request)){
             filterChain.doFilter(request, response);
@@ -44,11 +48,36 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         
         setAuthenticationContext(accessToken, request);
         //Si todo va bien pasamos el request al último filtro
-         filterChain.doFilter(request, response);
+        /*response.setHeader("Access-Control-Allow-Origin", "my-authorized-proxy-or-domain");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        response.setHeader("Access-Control-Allow-Headers","Content-Type, Access-Control-Headers-Allow-Headers,Authorization, X-Requested-With");*/
+         
+        filterChain.doFilter(request, response);
 
 
         
     }
+    
+    public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
+
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+        
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+        response.setHeader("Access-Control-Allow-Headers","Content-Type, Access-Control-Headers-Allow-Headers,Authorization, X-Requested-With");
+        
+        if("OPTIONS".equalsIgnoreCase(request.getMethod())){
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            chain.doFilter(req, res);
+        }
+        logger.info(request.getRemoteAddr());
+   
+    }
+    
+    
     
     //Si el accessToken es valido, establecemos un contexto de autentificaicon 
     private void setAuthenticationContext(String accessToken, HttpServletRequest request){

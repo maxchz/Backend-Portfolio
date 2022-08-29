@@ -37,7 +37,7 @@ public class HabilidadService implements IHabilidadService {
     
     //Método para buscar habilidad por clave foránea id persona
     @Override
-    public List<HabTech> buscarHabilidadPorIdPersona(Long id) {
+    public List<Habilidad> buscarHabilidadPorIdPersona(Long id) {
         return habilRepo.buscaHabilidadPorIdPersona(id);
     }
 

@@ -3,11 +3,14 @@ package com.ejemplo.SpringBoot.security;
 
 import com.ejemplo.SpringBoot.Jwt.JwtTokenFilter;
 import com.ejemplo.SpringBoot.repository.UsuarioRepository;
+import java.time.Duration;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -62,7 +65,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         //Habilitamos el CORS
-        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        
+        http.cors(withDefaults());
+        //http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        
         
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         
@@ -76,6 +82,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/nuevo/usuario").permitAll()
                 .antMatchers("/auth/login").permitAll()
+                .antMatchers("/ver/existe-usuario/{email}").permitAll()
+                //.antMatchers("/editar/persona").permitAll()
                 .anyRequest().authenticated();
 
         
@@ -87,6 +95,23 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 
                 
     }
+    
+    /*@Bean
+    CorsConfigurationSource corsConfigurationSource()
+    {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedHeaders(Arrays.asList("Origin.Accept", "X-Requested-Width","Content-Type","Access-Control-Request-Method","Access-Control-Request-Headers", "Authorization"));
+        configuration.setExposedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+        configuration.setAllowedOrigins(Arrays.asList("/*"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","OPTIONS","PATCH"));
+        configuration.addAllowedOrigin("*");
+        configuration.setMaxAge(Duration.ZERO);
+        configuration.setAllowCredentials(Boolean.TRUE);
+        UrlBasedCorsConfigurationSource source = new
+            UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }*/
     
     
     

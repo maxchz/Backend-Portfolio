@@ -8,6 +8,9 @@ import java.util.List;
 public interface IHabilidadBlandaService {
     //Metodos del CRUD: GET
     public List<HabilidadBlanda> verHabilidadBlanda();
+    
+    //Metodos del CRUD: GET
+    public List<HabilidadBlanda> buscarHabBlandaPorHabBlanda(String habBlanda);
 
     //Metodos del CRUD: POST
     public void crearHabilidadBlanda(HabilidadBlanda habBlan);
