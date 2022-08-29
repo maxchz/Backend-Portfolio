@@ -1,4 +1,3 @@
-
 package com.ejemplo.SpringBoot.repository;
 
 import com.ejemplo.SpringBoot.model.Persona;
@@ -10,14 +9,9 @@ import org.springframework.stereotype.Repository;
 //Repositorio para el objeto persona
 @Repository
 public interface PersonaRepository extends JpaRepository <Persona,  Long> {
-    //Creo un método para traer datos de la tabla Persona según el campo usuario_id
+    //Creo una consulta para traer datos de la tabla Persona según el campo usuario_id
     @Query("select x from Persona x where x.usuario_id like :var_param")
-    public abstract Persona buscaPersonaPorIdUsuario(@Param("var_param") Long usuario_id);
-    
-    //Creo un método para editar datos de la tabla Persona según el campo usuario_id
-    //@Query(value="", nativeQuery = true)
-    //public abstract Persona modificaPersonaPorIdUsuario(Persona pers, @Param("var_param") Long usuario_id);
-    
+    public abstract Persona buscaPersonaPorIdUsuario(@Param("var_param") Long usuario_id);    
 }
 
 

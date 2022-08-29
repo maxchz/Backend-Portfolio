@@ -1,7 +1,4 @@
-
 package com.ejemplo.SpringBoot.model;
-
-//Modelo del obhjeto proyecto
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +7,7 @@ import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+//Modelo del objeto proyecto
 @Getter @Setter
 @Entity
 public class Proyecto {
@@ -24,8 +22,7 @@ public class Proyecto {
     private String urlRepositorio;
     private Long persona_id;
     
-    public Proyecto(){
-    }
+    public Proyecto(){}
 
     public Proyecto(Long id,
                     String nombre,
@@ -44,8 +41,5 @@ public class Proyecto {
         this.urlProyecto = urlProyecto;
         this.urlRepositorio = urlRepositorio;
         this.persona_id = persona_id;
-    }
-    
-    
-    
+    }    
 }

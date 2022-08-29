@@ -17,17 +17,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JwtTokenUtil {
-    
-    //Declaramos una constsnte para manejar la excepción en caso que expire el token
-    private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
-    
-    
+    //Declaramos una constante para manejar la excepción en caso que expire el token
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);    
     //Constante para definir el tiempo de caducidad del token (24hs)
     private static final long EXPIRE_DURATION = 24 * 60 * 60 * 1000; // 24 hs
     //Clave secreta que se usará para firmar digitalmente el token
     @Value("${app.jwt.secret}")
-    private String secretKey;
-    
+    private String secretKey;    
     //Creamos el método para generar el token, setear todo sus componentes(Sujeto,quien lo hace, fecha de creación, tiempo de expiración, algoritmo usado)
     public String generateAccessToken( Usuario user){
         return Jwts.builder()
@@ -42,8 +38,7 @@ public class JwtTokenUtil {
     //Método para validar le JWT 
     public boolean validateAccessToken(String token){
         try{
-            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-            
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);            
             return true;
         } catch (ExpiredJwtException ex) {
             LOGGER.error("JWT expired", ex);
@@ -62,15 +57,12 @@ public class JwtTokenUtil {
     //Método para obtener el dominio o sujeto del token
      public String getSubject(String token){
          return parseClaims(token).getSubject();
-     }
-     
+     }     
      private Claims parseClaims(String token){
          return Jwts.parser()
                  .setSigningKey(secretKey)
                  .parseClaimsJws(token)
                  .getBody();
      }
-    
-    
-    
+     
 }

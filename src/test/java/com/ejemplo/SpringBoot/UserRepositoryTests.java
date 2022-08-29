@@ -1,4 +1,3 @@
-
 package com.ejemplo.SpringBoot;
 
 import com.ejemplo.SpringBoot.model.Usuario;
@@ -32,7 +31,6 @@ public class UserRepositoryTests {
         
         assertThat(savedUser).isNotNull();
         assertThat(savedUser.getId()).isGreaterThan(0);
-    }
-    
+    }  
     
 }

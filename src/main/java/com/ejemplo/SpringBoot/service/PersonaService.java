@@ -1,4 +1,3 @@
-
 package com.ejemplo.SpringBoot.service;
 
 import com.ejemplo.SpringBoot.model.Persona;
@@ -12,38 +11,30 @@ public class PersonaService implements IPersonaService{
     //Inyectamos la dependencia PersonaRepository
     @Autowired
     public PersonaRepository persoRepo;
-    //Implementa todos los metodos de la interface IPersonaService
-    
+    //Implementa todos los métodos de la interface IPersonaService
     @Override
     public List<Persona> verPersonas() {
         return persoRepo.findAll();
     }
-
     @Override
     public void crearPersona(Persona pers) {
         persoRepo.save(pers);
     }
-
     @Override
     public void borrarPersona(Long id) {
         persoRepo.deleteById(id);
     }
-
     @Override
     public Persona buscarPersona(Long id) {
         return persoRepo.findById(id).orElse(null);
-    }
-    
+    }    
     @Override
     public Persona buscarPersonaPorIdUsuario(Long id) {
         return persoRepo.buscaPersonaPorIdUsuario(id);
     }
-
     @Override
     public void modificarPersona(Persona pers) {
-        persoRepo.save(pers);
-        
-    }
-    
+        persoRepo.save(pers);        
+    }  
       
 }

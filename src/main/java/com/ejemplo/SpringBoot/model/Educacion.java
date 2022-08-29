@@ -22,8 +22,7 @@ public class Educacion {
     private String url_logo;
     private Long persona_id;
     
-    public Educacion(){
-    }
+    public Educacion(){}
 
     public Educacion(Long id,
                      String institucion,
@@ -42,8 +41,5 @@ public class Educacion {
         this.fechaFin = fechaFin;
         this.url_logo = url_logo;
         this.persona_id = persona_id;
-    }
-    
-    
-    
+    }    
 }

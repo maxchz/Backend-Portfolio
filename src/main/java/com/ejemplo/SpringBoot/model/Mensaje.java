@@ -1,7 +1,6 @@
 
 package com.ejemplo.SpringBoot.model;
 
-import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +12,7 @@ public class Mensaje {
     private String subject;
     private String body;
     
-    //public Mensaje(){}
+    public Mensaje(){}
 
     public Mensaje(String name, String mail, String subject, String body) {
         this.name = name;
@@ -46,9 +45,4 @@ public class Mensaje {
     public void setBody(String body) {
         this.body = body;
     }
-    
-    
-    
-    
-
 }

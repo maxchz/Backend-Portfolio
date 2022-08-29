@@ -1,4 +1,3 @@
-
 package com.ejemplo.SpringBoot.repository;
 
 import com.ejemplo.SpringBoot.model.Experiencia;
@@ -11,10 +10,7 @@ import org.springframework.stereotype.Repository;
 //Repositorio para el objeto experiencia
 @Repository
 public interface ExperienciaRepository extends JpaRepository <Experiencia, Long>{
-    //Creo un metodo para traer datos de la tabla experiencia segun el campo persona_id
+    //Creo una consulta para traer datos de la tabla experiencia según campo persona_id
     @Query("select x from Experiencia x where x.persona_id like :var_param")
-    public abstract List<Experiencia> buscaPorIdPersona(@Param("var_param") Long id);
-    
-    
-    
+    public abstract List<Experiencia> buscaPorIdPersona(@Param("var_param") Long id);    
 }

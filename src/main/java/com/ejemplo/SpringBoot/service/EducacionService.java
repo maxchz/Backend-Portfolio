@@ -1,20 +1,17 @@
-
 package com.ejemplo.SpringBoot.service;
 
 import com.ejemplo.SpringBoot.model.Educacion;
-import com.ejemplo.SpringBoot.model.Experiencia;
 import com.ejemplo.SpringBoot.repository.EducacionRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class EducacionService implements IEducacionService {
-      //Inyectamos la dependencia EducacionRepository
+    //Inyectamos la dependencia EducacionRepository
     @Autowired
     public EducacionRepository educaRepo;
-    //Implementa todos los metodos de la interface IPersonaService
+    //Implementa todos los métodos de la interface IPersonaService
 
     @Override
     public List<Educacion> verEducacion() {

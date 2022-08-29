@@ -1,7 +1,4 @@
-
 package com.ejemplo.SpringBoot.model;
-
-
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,15 +16,10 @@ public class Tecnologia {
     private Long id;
     private String tecnologia;
     
-    public Tecnologia(){
-        
-    }
+    public Tecnologia(){}
 
     public Tecnologia(Long id, String tecnologia) {
         this.id = id;
         this.tecnologia = tecnologia;
-    }
-    
-    
-    
+    }    
 }

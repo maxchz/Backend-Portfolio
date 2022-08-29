@@ -20,10 +20,7 @@ public class Habilidad {
     private String tecnologia;
     private Long persona_id;
     
-    public Habilidad (){
-        
-    }
-
+    public Habilidad (){}
     
     public Habilidad(Long id,
                      float progreso,
@@ -36,9 +33,6 @@ public class Habilidad {
         this.urlTecLogo = urlTecLogo;
         this.tecnologia = tecnologia;
         this.persona_id = persona_id;
-    }
-    
-    
-    
+    }   
     
 }
