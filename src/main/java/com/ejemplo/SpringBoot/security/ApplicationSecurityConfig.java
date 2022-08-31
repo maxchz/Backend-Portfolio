@@ -2,6 +2,8 @@ package com.ejemplo.SpringBoot.security;
 
 import com.ejemplo.SpringBoot.Jwt.JwtTokenFilter;
 import com.ejemplo.SpringBoot.repository.UsuarioRepository;
+import java.util.Arrays;
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 //Configuración inicial para permitir que se realicen request desde el frond sin tener que introducir usuario y clave
 //Ya que Spring Boot lo solicita por usar la dependencia security web
@@ -50,7 +53,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         //Habilitamos el CORS        
-        http.cors(withDefaults());        
+        http.cors(withDefaults()); 
+        http.cors().configurationSource(request-> {
+            CorsConfiguration configuration = new CorsConfiguration();
+            configuration.setAllowedOrigins(Arrays.asList("https://app-portfolio-front-argpro.web.app"));
+            configuration.setAllowedMethods(Arrays.asList("GET, POST, PUT, DELETE, OPTIONS, HEAD"));
+            configuration.setAllowedHeaders(List.of("*"));
+            return configuration;
+        });
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
         http.exceptionHandling().authenticationEntryPoint(
             (request, response, ex)->{
@@ -66,5 +76,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);              
                 
-    }    
+    }
+    
+    /* @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }*/
+
+    
 }
