@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 //Configuración inicial para permitir que se realicen request desde el frond sin tener que introducir usuario y clave
 //Ya que Spring Boot lo solicita por usar la dependencia security web
@@ -56,9 +57,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors(withDefaults()); 
         http.cors().configurationSource(request-> {
             CorsConfiguration configuration = new CorsConfiguration();
+            configuration.setAllowCredentials(true);
             configuration.setAllowedOrigins(Arrays.asList("https://app-portfolio-front-argpro.web.app"));
             configuration.setAllowedMethods(Arrays.asList("GET, POST, PUT, DELETE, OPTIONS, HEAD"));
-            configuration.setAllowedHeaders(List.of("*"));
+            configuration.setAllowedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin","Access-Control-Allow-Headers","Content-Type","Accept","Authorization","X-Requested-With","Access-Control-Allow-Credentials"));
+            configuration.setExposedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin","Access-Control-Allow-Headers","Content-Type","Accept","Authorization","X-Requested-With","Access-Control-Allow-Credentials"));
+            UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+            urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", configuration);
             return configuration;
         });
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
