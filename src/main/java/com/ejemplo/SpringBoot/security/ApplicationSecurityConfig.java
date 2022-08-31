@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 //Configuración inicial para permitir que se realicen request desde el frond sin tener que introducir usuario y clave
@@ -55,7 +56,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         //Habilitamos el CORS        
         http.cors(withDefaults()); 
-        http.cors().configurationSource(request-> {
+        http.cors().and();
+          /* configurationSource(request-> {
             CorsConfiguration configuration = new CorsConfiguration();
             configuration.setAllowCredentials(true);
             configuration.setAllowedOrigins(Arrays.asList("https://app-portfolio-front-argpro.web.app"));
@@ -65,7 +67,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
             UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
             urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", configuration);
             return configuration;
-        });
+        });*/
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
         http.exceptionHandling().authenticationEntryPoint(
             (request, response, ex)->{
@@ -83,15 +85,18 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 
     }
     
-    /* @Bean
+    @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Arrays.asList("https://app-portfolio-front-argpro.web.app"));
+        configuration.setAllowedMethods(Arrays.asList("GET, POST, PUT, DELETE, OPTIONS, HEAD"));
+        configuration.setAllowedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin","Access-Control-Allow-Headers","Content-Type","Accept","Authorization","X-Requested-With","Access-Control-Allow-Credentials"));
+        configuration.setExposedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin","Access-Control-Allow-Headers","Content-Type","Accept","Authorization","X-Requested-With","Access-Control-Allow-Credentials"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }*/
+    }
 
     
 }
