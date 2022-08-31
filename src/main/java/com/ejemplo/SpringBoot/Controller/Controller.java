@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200","http://localhost:4200/portfolio"} )
+@CrossOrigin(origins = {"http://localhost:4200","https://app-portfolio-front-argpro.web.app"} )
 public class Controller {
     //Inyectamos la dependencia Service de los objetos
     @Autowired
