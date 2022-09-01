@@ -61,13 +61,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //Habilitamos el CORS 
         //http.cors(Customizer.withDefaults());
-        http.cors().configurationSource(request->{
+        http.cors();
+                /*.configurationSource(request->{
             var cors = new CorsConfiguration();
-            cors.setAllowedOrigins(List.of("https://app-portfolio-front-argpro.web.app"));
+            cors.setAllowedOrigins(List.of("*"));
             cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
             cors.setAllowedHeaders(List.of("*"));
             return cors;            
-        });
+        });*/
         
          
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
@@ -84,10 +85,27 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/ver/existe-usuario/{email}").permitAll()
                 .anyRequest().authenticated();
         
-        http.csrf().disable();
+        //http.csrf().disable();
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);              
                 
+    }
+    
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedMethods(List.of("HEAD",
+                "GET", "POST", "PUT", "DELETE", "PATCH"));
+        // setAllowCredentials(true) is important, otherwise:
+        // The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
+        configuration.setAllowCredentials(true);
+        // setAllowedHeaders is important! Without it, OPTIONS preflight request
+        // will fail with 403 Invalid CORS request
+        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
     
     /*@Bean
