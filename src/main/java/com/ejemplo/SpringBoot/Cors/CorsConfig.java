@@ -1,5 +1,5 @@
 
-package com.ejemplo.SpringBoot.Cors;
+/*package com.ejemplo.SpringBoot.Cors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,4 +20,4 @@ public class CorsConfig implements WebMvcConfigurer {
                         .maxAge(3600);
                 }        
     
-}
+}*/
