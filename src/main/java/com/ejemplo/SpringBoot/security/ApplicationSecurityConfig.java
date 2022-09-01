@@ -62,8 +62,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //Habilitamos el CORS 
-        //http.cors(Customizer.withDefaults());
-        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        http.cors(Customizer.withDefaults());
+        //http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
 
                 /*.configurationSource(request->{
             var cors = new CorsConfiguration();
