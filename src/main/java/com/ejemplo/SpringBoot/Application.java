@@ -22,11 +22,11 @@ public class Application {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-                        //.allowedOrigins("https://app-portfolio-front-argpro.web.app")
-                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
-                        //.allowedHeaders("*")
-                        //.allowCredentials(true)
-                        //.maxAge(3600);
+                        .allowedOrigins("https://app-portfolio-front-argpro.web.app")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
+                        .allowedHeaders("*")
+                        .allowCredentials(true)
+                        .maxAge(3600);
                 }
         };
     }
