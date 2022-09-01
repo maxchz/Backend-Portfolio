@@ -1,5 +1,5 @@
 
-package com.ejemplo.SpringBoot.Cors;
+/*package com.ejemplo.SpringBoot.Cors;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -46,6 +46,6 @@ public void init(FilterConfig filterConfig) {
 public void destroy() {
 }
 
-}
+}*/
 
 

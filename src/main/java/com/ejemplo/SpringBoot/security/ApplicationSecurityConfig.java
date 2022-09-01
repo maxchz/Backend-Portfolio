@@ -62,8 +62,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        //Habilitamos el CORS 
-        http.cors();
+        
         //http.cors(Customizer.withDefaults());
         //http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
 
@@ -84,7 +83,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
             });
                
         //Aquí también podemos configurar el acceso por roles
-        http.authorizeRequests()
+        //Habilitamos el CORS 
+        http.cors().and()
+            .authorizeRequests()
                 .antMatchers("/nuevo/usuario").permitAll()
                 .antMatchers("/auth/login").permitAll()
                 .antMatchers("/ver/existe-usuario/{email}").permitAll()
@@ -112,19 +113,18 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }*/
     
-    /*@Bean
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Arrays.asList("https://app-portfolio-front-argpro.web.app"));
         configuration.setAllowedMethods(Arrays.asList("GET, POST, PUT, DELETE, OPTIONS, HEAD"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setExposedHeaders(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization","content-type","x-auth-token"));
+        configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }*/
+    }
 
     
 }

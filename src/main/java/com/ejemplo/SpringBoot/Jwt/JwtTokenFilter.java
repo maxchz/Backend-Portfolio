@@ -5,6 +5,8 @@ import com.ejemplo.SpringBoot.model.Usuario;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);        
     }
     
-    public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
+    
+    /*public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;        
                 
@@ -54,7 +57,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         }
         logger.info(request.getRemoteAddr());
    
-    }    
+    }*/    
     
     //Si el accessToken es valido, establecemos un contexto de autentificación 
     private void setAuthenticationContext(String accessToken, HttpServletRequest request){
