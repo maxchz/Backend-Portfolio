@@ -60,7 +60,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //Habilitamos el CORS 
-        http.cors(Customizer.withDefaults());
+        //http.cors(Customizer.withDefaults());
+        http.cors().configurationSource(request->{
+            var cors = new CorsConfiguration();
+            cors.setAllowedOrigins(List.of("https://app-portfolio-front-argpro.web.app"));
+            cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
+            cors.setAllowedHeaders(List.of("*"));
+            return cors;            
+        });
         
          
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
@@ -83,7 +90,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 
     }
     
-    @Bean
+    /*@Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
@@ -94,7 +101,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
+    }*/
 
     
 }
