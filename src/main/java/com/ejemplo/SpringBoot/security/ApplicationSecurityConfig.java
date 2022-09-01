@@ -63,7 +63,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //Habilitamos el CORS 
         //http.cors(Customizer.withDefaults());
-        http.cors();
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+
                 /*.configurationSource(request->{
             var cors = new CorsConfiguration();
             cors.setAllowedOrigins(List.of("*"));
@@ -110,7 +111,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }*/
     
-    @Bean
+    /*@Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
@@ -122,7 +123,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
+    }*/
 
     
 }
