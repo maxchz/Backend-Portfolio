@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
-    @Bean
+    /*@Bean
     public CorsConfigurationSource corsConfigurationSource() {
 	CorsConfiguration configuration = new CorsConfiguration();
 	configuration.setAllowedOrigins(Arrays.asList("https://app-portfolio-front-argpro.web.app"));
@@ -20,7 +20,7 @@ public class CorsConfig implements WebMvcConfigurer {
 	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	source.registerCorsConfiguration("/**", configuration);
 	return source;
-}
+}*/
     
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -28,8 +28,11 @@ public class CorsConfig implements WebMvcConfigurer {
             @Override
 	    public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-		.allowedOrigins("*")
-		.allowedHeaders("*");
+		.allowedOrigins("https://app-portfolio-front-argpro.web.app")
+                .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS")
+		.allowedHeaders("*")
+                .exposedHeaders("*")
+                .maxAge(3600);
 			
             }
         };
