@@ -16,7 +16,7 @@ public class Application {
     
     
     
-   /*@Bean
+   @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
@@ -25,10 +25,10 @@ public class Application {
                         .allowedOrigins("https://app-portfolio-front-argpro.web.app")
                         .allowedMethods("*")
                         .allowedHeaders("*")
-                        .allowCredentials(false)
+                        .allowCredentials(true)
                         .maxAge(3600);
                 }
         };
-    }*/
+    }
 }
 

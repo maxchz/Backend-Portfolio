@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -58,7 +59,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     //Actualizamos este método para que los GETs estén protegidos, que no tengan acceso publico
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //Habilitamos el CORS         
+        //Habilitamos el CORS 
+        http.cors(Customizer.withDefaults());
+        
          
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
         http.exceptionHandling().authenticationEntryPoint(
@@ -66,13 +69,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 ex.getMessage();
             });
-        http.cors().and().        
+               
         //Aquí también podemos configurar el acceso por roles
-        authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/nuevo/usuario").permitAll()
                 .antMatchers("/auth/login").permitAll()
                 .antMatchers("/ver/existe-usuario/{email}").permitAll()
                 .anyRequest().authenticated();
+        
         http.csrf().disable();
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);              
