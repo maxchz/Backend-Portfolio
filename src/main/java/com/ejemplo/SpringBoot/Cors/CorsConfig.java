@@ -7,21 +7,18 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class CorsConfig {
+public class CorsConfig implements WebMvcConfigurer {
     
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
+    
             @Override
             public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
                         .allowedOrigins("https://app-portfolio-front-argpro.web.app")
                         .allowedMethods("*")
                         .allowedHeaders("*")
-                        .allowCredentials(false)
+                        .allowCredentials(true)
                         .maxAge(-1);
                 }
         };
-    }
-    
+    }    
 }
