@@ -61,7 +61,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     //Actualizamos este método para que los GETs estén protegidos, que no tengan acceso publico
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.cors().and().csrf().disable()
         
         //http.cors(Customizer.withDefaults());
         //http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
@@ -75,23 +75,24 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         });*/
         
          
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
-        http.exceptionHandling().authenticationEntryPoint(
+        .exceptionHandling().authenticationEntryPoint(
             (request, response, ex)->{
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 ex.getMessage();
-            });
+            }).and()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()        
+        
                
         //Aquí también podemos configurar el acceso por roles
         //Habilitamos el CORS 
-        http.cors().and()
+        
             .authorizeRequests()
                 .antMatchers("/nuevo/usuario").permitAll()
                 .antMatchers("/auth/login").permitAll()
                 .antMatchers("/ver/existe-usuario/{email}").permitAll()
                 .anyRequest().authenticated();
         
-
+        http.headers().frameOptions().sameOrigin();
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);              
                 
     }
