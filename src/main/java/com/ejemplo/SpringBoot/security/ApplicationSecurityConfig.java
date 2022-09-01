@@ -57,26 +57,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean(); 
     }
-    @Bean
-    public FilterRegistrationBean corsFilter() {
-    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration config = new CorsConfiguration();
-    config.setAllowCredentials(true);
-    config.addAllowedOrigin("https://app-portfolio-front-argpro.web.app"); // @Value: http://localhost:8080
-    config.addAllowedHeader("*");
-    config.addAllowedMethod("*");
-    source.registerCorsConfiguration("/**", config);
-    FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-    bean.setOrder(0);
-    return bean;
-  }
-    
+        
     //Actualizamos este método para que los GETs estén protegidos, que no tengan acceso publico
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //Habilitamos el CORS 
         //http.cors(Customizer.withDefaults());
-        http.cors();
+        http.cors(withDefaults());
                 /*.configurationSource(request->{
             var cors = new CorsConfiguration();
             cors.setAllowedOrigins(List.of("*"));
@@ -100,7 +87,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/ver/existe-usuario/{email}").permitAll()
                 .anyRequest().authenticated();
         
-        //http.csrf().disable();
+        http.csrf().disable();
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);              
                 

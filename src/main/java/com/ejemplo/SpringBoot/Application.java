@@ -19,7 +19,7 @@ public class Application {
    @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
-            @Override
+            /*@Override
             public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
                         .allowedOrigins("https://app-portfolio-front-argpro.web.app")
@@ -27,7 +27,7 @@ public class Application {
                         .allowedHeaders("*")
                         .allowCredentials(true)
                         .maxAge(3600);
-                }
+                }*/
         };
     }
 }
