@@ -1,5 +1,5 @@
 
-package com.ejemplo.SpringBoot.Cors;
+/*package com.ejemplo.SpringBoot.Cors;
 
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
@@ -30,4 +30,4 @@ public class CorsConfig implements WebMvcConfigurer {
         };
     }  
     
-}
+}*/
