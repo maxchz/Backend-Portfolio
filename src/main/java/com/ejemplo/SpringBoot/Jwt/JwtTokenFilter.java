@@ -46,6 +46,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
         response.setHeader("Access-Control-Allow-Headers","Content-Type, Access-Control-Headers-Allow-Headers,Authorization, X-Requested-With");
         
+        if(response.getHeader("Access-Control-Allow-Origin")== null){
+            response.addHeader("Access-Control-Allow-Origin","*");
+        }
+        
         if("OPTIONS".equalsIgnoreCase(request.getMethod())){
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
