@@ -54,9 +54,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        //Habilitamos el CORS        
+        //Habilitamos el CORS  
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Arrays.asList("https://app-portfolio-front-argpro.web.app"));
+        configuration.setAllowedMethods(Arrays.asList("GET, POST, PUT, DELETE, OPTIONS, HEAD"));
+        configuration.setAllowedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin","Access-Control-Allow-Headers","Content-Type","Accept","Authorization","X-Requested-With","Access-Control-Allow-Credentials"));
+        configuration.setExposedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin","Access-Control-Allow-Headers","Content-Type","Accept","Authorization","X-Requested-With","Access-Control-Allow-Credentials"));
         http.cors(withDefaults()); 
-        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        http.cors().configurationSource(request -> configuration);
           /* configurationSource(request-> {
             CorsConfiguration configuration = new CorsConfiguration();
             configuration.setAllowCredentials(true);
