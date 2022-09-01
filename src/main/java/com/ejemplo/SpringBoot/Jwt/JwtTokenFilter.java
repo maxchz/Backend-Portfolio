@@ -41,11 +41,18 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;        
+        response.addHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+        response.setHeader("Access-Control-Allow-Headers","Content-Type, Access-Control-Headers-Allow-Headers,Authorization, X-Requested-With");
+        response.setHeader("Access-Control-Max-Age", "3600");    
+
+        /* HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;        
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-        response.setHeader("Access-Control-Allow-Headers","Content-Type, Access-Control-Headers-Allow-Headers,Authorization, X-Requested-With");
-        
+        response.setHeader("Access-Control-Allow-Headers","Content-Type, Access-Control-Headers-Allow-Headers,Authorization, X-Requested-With");*/
          
         if("OPTIONS".equalsIgnoreCase(request.getMethod())){
             response.setStatus(HttpServletResponse.SC_OK);
