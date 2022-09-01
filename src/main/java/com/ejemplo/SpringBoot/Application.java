@@ -26,7 +26,7 @@ public class Application {
                         .allowedMethods("*")
                         .allowedHeaders("*")
                         .allowCredentials(false)
-                        .maxAge(-1);
+                        .maxAge(3600);
                 }
         };
     }

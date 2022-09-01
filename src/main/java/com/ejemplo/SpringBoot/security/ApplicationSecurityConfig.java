@@ -4,9 +4,11 @@ import com.ejemplo.SpringBoot.Jwt.JwtTokenFilter;
 import com.ejemplo.SpringBoot.repository.UsuarioRepository;
 import java.util.Arrays;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,6 +26,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 //Configuración inicial para permitir que se realicen request desde el frond sin tener que introducir usuario y clave
 //Ya que Spring Boot lo solicita por usar la dependencia security web
+@Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -55,14 +58,19 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         //Habilitamos el CORS  
-        CorsConfiguration configuration = new CorsConfiguration();
+        /*CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Arrays.asList("https://app-portfolio-front-argpro.web.app"));
         configuration.setAllowedMethods(Arrays.asList("GET, POST, PUT, DELETE, OPTIONS, HEAD"));
         configuration.setAllowedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin","Access-Control-Allow-Headers","Content-Type","Accept","Authorization","X-Requested-With","Access-Control-Allow-Credentials"));
         configuration.setExposedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin","Access-Control-Allow-Headers","Content-Type","Accept","Authorization","X-Requested-With","Access-Control-Allow-Credentials"));
-        http.cors(withDefaults()); 
-        http.cors().configurationSource(request -> configuration);
+        http.cors(withDefaults()); */
+        http.cors().configurationSource(new  CorsConfigurationSource(){
+            @Override
+            public CorsConfiguration getCorsConfiguration(HttpServletRequest request){
+                return new CorsConfiguration().applyPermitDefaultValues();
+            }
+        });
           /* configurationSource(request-> {
             CorsConfiguration configuration = new CorsConfiguration();
             configuration.setAllowCredentials(true);
