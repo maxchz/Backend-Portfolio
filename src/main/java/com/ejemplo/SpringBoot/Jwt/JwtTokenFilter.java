@@ -47,6 +47,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
         response.setHeader("Access-Control-Allow-Headers","Content-Type, Access-Control-Headers-Allow-Headers,Authorization, X-Requested-With");
         response.setHeader("Access-Control-Max-Age", "3600");    
+            chain.doFilter(req, res);
 
         /* HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;        
