@@ -41,11 +41,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     }
     
     
-    public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
+    /*public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;        
                 
-        response.addHeader("Access-Control-Allow-Origin", "https://app-portfolio-front-argpro.web.app");
+        response.addHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
         response.setHeader("Access-Control-Allow-Headers","Content-Type,Access-Control-Allow-Origin, Access-Control-Headers-Allow-Headers,Authorization, X-Requested-With");
@@ -57,7 +57,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         }
         logger.info(request.getRemoteAddr());
    
-    }  
+    } */ 
     
     //Si el accessToken es valido, establecemos un contexto de autentificación 
     private void setAuthenticationContext(String accessToken, HttpServletRequest request){
