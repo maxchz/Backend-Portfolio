@@ -45,7 +45,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;        
                 
-        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Origin", "https://app-portfolio-front-argpro.web.app");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
         response.setHeader("Access-Control-Allow-Headers","Content-Type,Access-Control-Allow-Origin, Access-Control-Headers-Allow-Headers,Authorization, X-Requested-With");
