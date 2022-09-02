@@ -61,8 +61,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     //Actualizamos este método para que los GETs estén protegidos, que no tengan acceso publico
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //http.cors().and().csrf().disable()
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
+        //http.csrf().disable()
         //http.cors(Customizer.withDefaults());
         //http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
 
