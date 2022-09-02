@@ -20,15 +20,18 @@ public class Application {
     
     @Bean
     public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
+        return new WebMvcConfigurer() {};
+
+    }
+        /*return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins("https://app-portfolio-front-argpro.web.app");
             }
         };
-    }
+    }*/
     
-    @Bean
+    /*@Bean
     public CorsFilter corsFilter(){
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
@@ -39,7 +42,7 @@ public class Application {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return  new CorsFilter(source);
-    }
+    }*/
 
     
     
