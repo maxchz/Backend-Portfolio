@@ -36,7 +36,7 @@ public class Application {
         };
     }*/
     
-    @Bean
+    /*@Bean
     public CorsFilter corsFilter(){
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
@@ -47,7 +47,7 @@ public class Application {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return  new CorsFilter(source);
-    }
+    }*/
 
     
     

@@ -61,8 +61,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     //Actualizamos este método para que los GETs estén protegidos, que no tengan acceso publico
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors();
-        http.csrf().disable()
+        http.csrf().disable();
+
+        http.cors(c -> {
+            CorsConfigurationSource cs = r ->{
+                CorsConfiguration cc = new CorsConfiguration();
+                cc.setAllowedOrigins(List.of("https://app-portfolio-front-argpro.web.app"));
+                cc.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
+                return cc;                
+            };
+            c.configurationSource(cs);
+        });
         //http.csrf().disable()
         //http.cors(Customizer.withDefaults());
         //http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
@@ -76,18 +85,18 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         });*/
         
          
-        .exceptionHandling().authenticationEntryPoint(
+        http.exceptionHandling().authenticationEntryPoint(
             (request, response, ex)->{
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 ex.getMessage();
-            }).and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()        
+            });
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);        
         
                
         //Aquí también podemos configurar el acceso por roles
         //Habilitamos el CORS 
         
-        .authorizeRequests()
+        http.authorizeRequests()
             .antMatchers("/nuevo/usuario").permitAll()
             .antMatchers("/auth/login").permitAll()
             .antMatchers("/ver/existe-usuario/{email}").permitAll()
