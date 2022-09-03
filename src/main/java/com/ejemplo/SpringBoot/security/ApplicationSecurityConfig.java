@@ -63,7 +63,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
-        http.cors(c -> {
+       /* http.cors(c -> {
             CorsConfigurationSource cs = r ->{
                 CorsConfiguration cc = new CorsConfiguration();
                 cc.setAllowedOrigins(List.of("https://app-portfolio-front-argpro.web.app"));
@@ -71,9 +71,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 return cc;                
             };
             c.configurationSource(cs);
-        });
+        });*/
+       
         //http.csrf().disable()
-        //http.cors(Customizer.withDefaults());
+        http.cors(Customizer.withDefaults());
         //http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
 
                 /*.configurationSource(request->{

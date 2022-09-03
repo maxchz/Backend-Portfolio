@@ -41,7 +41,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     }
     
     
-    /*public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
+    public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;        
                 
@@ -57,7 +57,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         }
         logger.info(request.getRemoteAddr());
    
-    } */ 
+    }  
     
     //Si el accessToken es valido, establecemos un contexto de autentificación 
     private void setAuthenticationContext(String accessToken, HttpServletRequest request){
