@@ -22,7 +22,12 @@ public class Application {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("https://app-portfolio-front-argpro.web.app");
+                registry.addMapping("/**")
+                        .allowedOrigins("https://app-portfolio-front-argpro.web.app")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS")
+                        .allowedHeaders("*")
+                        .exposedHeaders("*")                        
+                        .maxAge(3600);
             }
         };
 
