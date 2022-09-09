@@ -14,6 +14,6 @@ public interface HabilidadBlandaRepository extends JpaRepository <HabilidadBland
     @Query("select x from HabilidadBlanda x where x.persona_id like :var_param")
     public abstract List<HabilidadBlanda> buscarHabBlandaPorIdPersona(@Param("var_param") Long id);
     
-    @Query("select x from HabilidadBlanda x where x.hab_blanda like :param_var")
-    public List<HabilidadBlanda> buscarHabBlandaPorHabBlanda(@Param("param_var") String habBlanda);
+    @Query("select x from HabilidadBlanda x where x.hab_blanda like :param")
+    public List<HabilidadBlanda> buscarHabBlandaPorHabBlanda(@Param("param") String habBlanda);
 }
