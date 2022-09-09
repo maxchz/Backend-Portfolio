@@ -14,14 +14,14 @@ public class HabilidadBlanda {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String habilidadBlanda;
+    private String hab_blanda;
     private Long persona_id;
     
     public HabilidadBlanda(){}
 
     public HabilidadBlanda(Long id, String habilidadBlanda, Long persona_id) {
         this.id = id;
-        this.habilidadBlanda = habilidadBlanda;
+        this.hab_blanda = habilidadBlanda;
         this.persona_id = persona_id;
     }    
 }
