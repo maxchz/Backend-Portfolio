@@ -237,7 +237,7 @@ public class Controller {
         return habilidadBlandaServ.verHabilidadBlanda();                      
     }
     
-    @GetMapping ("/ver/habilidad-blanda/habBlanda/{habBlanda}")
+    @GetMapping ("/ver/habilidad-blanda/{habBlanda}")
     @ResponseBody
     public List<HabilidadBlanda> buscarHabBlandaPorHabBlanda(@PathVariable String habBlanda){
         return habilidadBlandaServ.buscarHabBlandaPorHabBlanda(habBlanda);                      
