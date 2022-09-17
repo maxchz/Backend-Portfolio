@@ -8,15 +8,15 @@ import lombok.Setter;
 public class Mensaje {
    
     private String name;
-    private String mail;
+    private String email;
     private String subject;
     private String body;
     
     public Mensaje(){}
 
-    public Mensaje(String name, String mail, String subject, String body) {
+    public Mensaje(String name, String email, String subject, String body) {
         this.name = name;
-        this.mail = mail;
+        this.email = email;
         this.subject = subject;
         this.body = body;
     }
@@ -28,10 +28,10 @@ public class Mensaje {
         this.name = name;
     }
     public String getMail(){
-        return mail;
+        return email;
     }
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setMail(String email) {
+        this.email = email;
     }
     public String getSubject(){
         return subject;
