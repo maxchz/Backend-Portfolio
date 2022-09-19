@@ -17,5 +17,15 @@ public class EnviarmensajeService {
         mailMessage.setSubject(subject);
         mailMessage.setText(body);        
         javaMailSender.send(mailMessage);        
-    }    
+    }
+    
+    public void sendMailHome(String to, String subject, String body){        
+        SimpleMailMessage mailMessage = new SimpleMailMessage();        
+        mailMessage.setFrom("chqzmax@gmail.com");
+        mailMessage.setTo(to);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(body);        
+        javaMailSender.send(mailMessage);        
+    } 
+    
 }

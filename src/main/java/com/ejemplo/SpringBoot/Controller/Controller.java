@@ -335,13 +335,22 @@ public class Controller {
     }   
     
     
-    //PARA ENVIAR EMIAL DESDE SECCION CONTACTO
+    //PARA ENVIAR EMIAL DESDE SECCION CONTACTO PORTFOLIO
         
     @PostMapping("/enviar-mensaje-desde-portfolio")
     public void sendMail(@RequestBody Mensaje msj) throws GeneralSecurityException{        
         String message = msj.getBody() + "\n\n ****Datos de contacto**** " + "\nNombre: " + msj.getName() + "\nE-mail: " + msj.getMail();
        sendMailService.sendMail("chzanibal@gmail.com", msj.getSubject(), message);
     }
+    
+    //PARA ENVIAR EMIAL DESDE SECCION CONTACTO HOME
+        
+    @PostMapping("/enviar-mensaje-desde-home")
+    public void sendMailHome(@RequestBody Mensaje msj) throws GeneralSecurityException{        
+        String message = msj.getBody() + "\n\n ****Datos de contacto**** " + "\nNombre: " + msj.getName() + "\nE-mail: " + msj.getMail();
+       sendMailService.sendMailHome("chzanibal@gmail.com", msj.getSubject(), message);
+    }
+    
     
 }
 

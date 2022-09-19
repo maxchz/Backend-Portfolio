@@ -101,6 +101,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/nuevo/usuario").permitAll()
             .antMatchers("/auth/login").permitAll()
             .antMatchers("/ver/existe-usuario/{email}").permitAll()
+            .antMatchers("/enviar-mensaje-desde-home").permitAll()    
             .anyRequest().authenticated();
         
         http.headers().frameOptions().sameOrigin();
