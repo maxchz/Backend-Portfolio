@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.ToString;
 
 //Modelo del objeto Habilidad - Tecnologia
-//@Getter @Setter
-//@Entity
 @Data
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
