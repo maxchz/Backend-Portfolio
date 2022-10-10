@@ -277,8 +277,7 @@ public class Controller {
     @PutMapping ("/editar/tecnologia")
     public void modificarTecnologia(@RequestBody Tecnologia tech){
         tecnologiaServ.modificarTecnologia(tech);                            
-    }
-    
+    }    
       
     //API PARA LOGIN USUARIO
     @PostMapping("/auth/login")
@@ -337,7 +336,7 @@ public class Controller {
         
     @PostMapping("/enviar-mensaje-desde-portfolio")
     public void sendMail(@RequestBody Mensaje msj) throws GeneralSecurityException{        
-        String message = msj.getBody() + "\n\n ****Datos de contacto**** " + "\nNombre: " + msj.getName() + "\nE-mail: " + msj.getMail();
+       String message = msj.getBody() + "\n\n ****Datos de contacto**** " + "\nNombre: " + msj.getName() + "\nE-mail: " + msj.getMail();
        sendMailService.sendMail("chzanibal@gmail.com", msj.getSubject(), message);
     }
     
@@ -345,7 +344,7 @@ public class Controller {
         
     @PostMapping("/enviar-mensaje-desde-home")
     public void sendMailHome(@RequestBody Mensaje msj) throws GeneralSecurityException{        
-        String message = msj.getBody() + "\n\n ****Datos de contacto**** " + "\nNombre: " + msj.getName() + "\nE-mail: " + msj.getMail();
+       String message = msj.getBody() + "\n\n ****Datos de contacto**** " + "\nNombre: " + msj.getName() + "\nE-mail: " + msj.getMail();
        sendMailService.sendMailHome("chzanibal@gmail.com", msj.getSubject(), message);
     }
     
