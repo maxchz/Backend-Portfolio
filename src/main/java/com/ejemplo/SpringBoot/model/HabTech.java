@@ -1,17 +1,17 @@
 
-package com.ejemplo.SpringBoot.model;
+//package com.ejemplo.SpringBoot.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
-import lombok.ToString;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonInclude;
+//import lombok.Data;
+//import lombok.ToString;
 
 //Modelo del objeto Habilidad - Tecnologia
-@Data
-@ToString
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class HabTech {
+//@Data
+//@ToString
+//@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+/*public class HabTech {
    
     private Long id;
     private float progreso;
@@ -26,4 +26,4 @@ public class HabTech {
         this.urlTecLogo = urlTecLogo;
         this.tecnologia = tecnologia;
     }    
-}
+}*/
